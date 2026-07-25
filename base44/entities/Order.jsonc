@@ -1,0 +1,98 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "telephone": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "default": "Netherlands"
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "subtotal": {
+      "type": "number"
+    },
+    "tax_rate": {
+      "type": "number"
+    },
+    "tax_amount": {
+      "type": "number"
+    },
+    "total": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "Bank Transfer"
+      ],
+      "default": "Bank Transfer"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Paid",
+        "Overdue",
+        "Cancelled"
+      ],
+      "default": "Pending"
+    },
+    "order_status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Confirmed",
+        "Processing",
+        "Shipped",
+        "Delivered",
+        "Cancelled"
+      ],
+      "default": "New"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order_number",
+    "customer_name",
+    "email",
+    "telephone",
+    "items",
+    "subtotal",
+    "total"
+  ]
+}

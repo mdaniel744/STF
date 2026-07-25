@@ -1,0 +1,150 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "container_type": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "High Cube",
+        "Open Side",
+        "Office",
+        "Storage",
+        "Refrigerated"
+      ]
+    },
+    "container_size": {
+      "type": "string",
+      "enum": [
+        "10ft",
+        "20ft",
+        "40ft"
+      ]
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Used",
+        "One Trip",
+        "WWT"
+      ]
+    },
+    "color": {
+      "type": "string",
+      "enum": [
+        "Blue",
+        "Grey",
+        "Green",
+        "White",
+        "Red",
+        "Brown"
+      ]
+    },
+    "available_colors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Blue",
+          "Grey",
+          "Green",
+          "White",
+          "Red",
+          "Brown"
+        ]
+      }
+    },
+    "price": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "specs_length": {
+      "type": "string"
+    },
+    "specs_width": {
+      "type": "string"
+    },
+    "specs_height": {
+      "type": "string"
+    },
+    "specs_weight": {
+      "type": "string"
+    },
+    "specs_volume": {
+      "type": "string"
+    },
+    "specs_payload": {
+      "type": "string"
+    },
+    "specs_floor_type": {
+      "type": "string"
+    },
+    "specs_door_type": {
+      "type": "string"
+    },
+    "features": {
+      "type": "string"
+    },
+    "applications": {
+      "type": "string"
+    },
+    "delivery_info": {
+      "type": "string"
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "In Stock",
+        "Out of Stock",
+        "Pre-Order"
+      ],
+      "default": "In Stock"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "main_image": {
+      "type": "string"
+    },
+    "gallery_images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "seo_title": {
+      "type": "string"
+    },
+    "seo_description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "slug",
+    "container_type",
+    "container_size",
+    "condition",
+    "price"
+  ]
+}

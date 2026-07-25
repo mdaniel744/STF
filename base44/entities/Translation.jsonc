@@ -1,0 +1,27 @@
+{
+  "name": "Translation",
+  "type": "object",
+  "properties": {
+    "source_hash": {
+      "type": "string"
+    },
+    "source_language": {
+      "type": "string",
+      "default": "en"
+    },
+    "target_language": {
+      "type": "string"
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "translated_text": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_hash",
+    "target_language",
+    "translated_text"
+  ]
+}

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 174 83% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 174 30% 94%;
+    --secondary-foreground: 174 83% 25%;
+    --muted: 174 20% 95%;
+    --muted-foreground: 174 20% 40%;
+    --accent: 46 81% 52%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 174 15% 88%;
+    --input: 174 15% 88%;
+    --ring: 174 83% 40%;
+    --chart-1: 174 83% 40%;
+    --chart-2: 46 81% 52%;
+    --chart-3: 174 30% 45%;
+    --chart-4: 43 96% 70%;
+    --chart-5: 199 89% 48%;
+    --radius: 0.5rem;
+    --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --sidebar-background: 176 74% 21%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 46 81% 52%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 177 78% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 175 60% 30%;
+    --sidebar-ring: 46 81% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .font-technical {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f0fdfa;
+}
+::-webkit-scrollbar-thumb {
+  background: #0d9488;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0f766e;
+}

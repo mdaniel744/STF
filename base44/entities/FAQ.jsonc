@@ -1,0 +1,33 @@
+{
+  "name": "FAQ",
+  "type": "object",
+  "properties": {
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Container Sizes",
+        "Delivery",
+        "Payment",
+        "Warranty",
+        "New vs Used",
+        "High Cube",
+        "Open Side",
+        "Refrigerated"
+      ]
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "question",
+    "answer"
+  ]
+}
