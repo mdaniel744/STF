@@ -1,21 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "@/components/LocalizedLink";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { listFeaturedCategories } from "@/api/categories";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const [categories, setCategories] = useState([]);
 
-  const containerLinks = [
-    { label: t("footer.standardContainers"), type: "Standard" },
-    { label: t("footer.highCubeContainers"), type: "High Cube" },
-    { label: t("footer.openSideContainers"), type: "Open Side" },
-    { label: t("footer.officeContainers"), type: "Office" },
-    { label: t("footer.storageContainers"), type: "Storage" },
-    { label: t("footer.refrigeratedContainers"), type: "Refrigerated" },
-  ];
+  useEffect(() => {
+    listFeaturedCategories().then(setCategories);
+  }, []);
+
+  const containerLinks = categories.map((cat) => ({ label: cat.name, type: cat.name, id: cat.id }));
 
   const companyLinks = [
     { label: t("footer.aboutUs"), path: "/about" },
@@ -58,7 +57,7 @@ export default function Footer() {
             <h4 className="font-semibold text-sm uppercase tracking-wider mb-6 text-white/90">{t("footer.containers")}</h4>
             <ul className="space-y-3">
               {containerLinks.map((item) => (
-                <li key={item.type}>
+                <li key={item.id}>
                   <Link to={`/containers?type=${encodeURIComponent(item.type)}`} className="text-sm text-white/60 hover:text-orange-400 transition-colors">
                     {item.label}
                   </Link>

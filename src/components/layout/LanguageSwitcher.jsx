@@ -4,8 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { Globe, Check, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useEnabledLocales } from "@/hooks/useEnabledLocales";
 
-const languages = [
+const ALL_LANGUAGES = [
   { code: "nl", label: "Nederlands", flag: "https://flagcdn.com/w80/nl.png", flagName: "Netherlands" },
   { code: "en", label: "English", flag: "https://flagcdn.com/w80/gb.png", flagName: "United Kingdom" },
   { code: "de", label: "Deutsch", flag: "https://flagcdn.com/w80/de.png", flagName: "Germany" },
@@ -15,8 +16,10 @@ const languages = [
 
 export default function LanguageSwitcher() {
   const { language, setLanguage, t } = useLanguage();
+  const enabledLocales = useEnabledLocales();
+  const languages = ALL_LANGUAGES.filter((l) => enabledLocales.includes(l.code));
   const [open, setOpen] = useState(false);
-  const current = languages.find((l) => l.code === language) || languages[0];
+  const current = languages.find((l) => l.code === language) || languages[0] || ALL_LANGUAGES[0];
   const ref = useRef(null);
 
   useEffect(() => {
