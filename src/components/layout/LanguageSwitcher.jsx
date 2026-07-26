@@ -33,8 +33,12 @@ export default function LanguageSwitcher() {
   return (
     <div className="relative" ref={ref}>
       <button
+        type="button"
+        aria-label={`${t("language.label")}: ${current.label}`}
+        aria-haspopup="menu"
+        aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors border-gray-200 text-navy-800 hover:bg-gray-50"
+        className="flex h-11 touch-manipulation items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-navy-800 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
       >
         <img src={current.flag} alt={current.flagName} className="w-6 h-4 rounded-sm object-cover" />
         <span className="text-sm font-medium hidden sm:block text-[hsl(var(--foreground))]">{current.code.toUpperCase()}</span>
@@ -44,6 +48,7 @@ export default function LanguageSwitcher() {
       <AnimatePresence>
         {open && (
           <motion.div
+            role="menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -57,6 +62,9 @@ export default function LanguageSwitcher() {
             {languages.map((lang) => (
               <button
                 key={lang.code}
+                type="button"
+                role="menuitemradio"
+                aria-checked={current.code === lang.code}
                 onClick={() => {
                   setLanguage(lang.code);
                   setOpen(false);

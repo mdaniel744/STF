@@ -23,6 +23,9 @@ export const translations = {
       faq: "FAQ",
       contact: "Contact",
       menu: "Menu",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+      primaryNavigation: "Primary navigation",
       requestQuote: "Request a Quote",
     },
     cart: {
@@ -378,6 +381,9 @@ export const translations = {
       faq: "FAQ",
       contact: "Contact",
       menu: "Menu",
+      openMenu: "Menu openen",
+      closeMenu: "Menu sluiten",
+      primaryNavigation: "Hoofdnavigatie",
       requestQuote: "Offerte Aanvragen",
     },
     cart: {
@@ -733,6 +739,9 @@ export const translations = {
       faq: "FAQ",
       contact: "Kontakt",
       menu: "Menü",
+      openMenu: "Menü öffnen",
+      closeMenu: "Menü schließen",
+      primaryNavigation: "Hauptnavigation",
       requestQuote: "Angebot Anfordern",
     },
     footer: {
@@ -1088,6 +1097,9 @@ export const translations = {
       faq: "FAQ",
       contact: "Contact",
       menu: "Menu",
+      openMenu: "Ouvrir le menu",
+      closeMenu: "Fermer le menu",
+      primaryNavigation: "Navigation principale",
       requestQuote: "Demander un Devis",
     },
     cart: {
@@ -1443,6 +1455,9 @@ export const translations = {
       faq: "FAQ",
       contact: "Contacto",
       menu: "Menú",
+      openMenu: "Abrir menú",
+      closeMenu: "Cerrar menú",
+      primaryNavigation: "Navegación principal",
       requestQuote: "Solicitar Presupuesto",
     },
     cart: {

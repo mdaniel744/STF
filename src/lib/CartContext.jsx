@@ -7,20 +7,25 @@ const STORAGE_KEY = "stf_cart";
 export const VAT_RATE = 0.21;
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState(() => {
-    if (typeof window === "undefined") return [];
-
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [items, setItems] = useState([]);
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      const parsed = saved ? JSON.parse(saved) : [];
+      setItems(Array.isArray(parsed) ? parsed : []);
+    } catch {
+      setItems([]);
+    } finally {
+      setStorageReady(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!storageReady) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  }, [items, storageReady]);
 
   const addItem = (product, quantity = 1, color = null) => {
     setItems((prev) => {
