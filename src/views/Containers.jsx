@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "@/components/LocalizedLink";
 import { filterProducts, listProducts } from "@/api/products";
+import { findCategoryBySlug } from "@/api/categories";
 import ProductCard from "@/components/containers/ProductCard";
 import SEOSection from "@/components/containers/SEOSection";
 import { Search, SlidersHorizontal, X, Loader2, ChevronRight } from "lucide-react";
@@ -10,6 +11,7 @@ import TrustBar from "@/components/shared/TrustBar";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizeDefaultProduct } from "@/data/default-products";
 import { displayProductLabel } from "@/lib/i18n/productLabels";
+import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 
 const SIZES = ["10ft", "20ft", "40ft"];
 const TYPES = ["Standard", "High Cube", "Open Side", "Office", "Storage", "Refrigerated"];
@@ -34,6 +36,9 @@ export default function Containers() {
     availability: searchParams.get("availability") || "",
     sort: searchParams.get("sort") || "newest",
   };
+  const categorySlug = searchParams.get("category") || "";
+  const [categoryId, setCategoryId] = useState(null);
+  const [categoryResolved, setCategoryResolved] = useState(!categorySlug);
 
   const pushParams = (params) => {
     const queryString = params.toString();
@@ -49,9 +54,29 @@ export default function Containers() {
 
   const clearFilters = () => router.push(pathname);
 
-  const activeFilterCount = [filters.size, filters.type, filters.condition, filters.color, filters.availability].filter(Boolean).length;
+  const activeFilterCount = [filters.size, filters.type, filters.condition, filters.color, filters.availability, categorySlug].filter(Boolean).length;
 
   useEffect(() => {
+    if (!categorySlug) {
+      setCategoryId(null);
+      setCategoryResolved(true);
+      return;
+    }
+    setCategoryResolved(false);
+    let cancelled = false;
+    findCategoryBySlug(categorySlug).then((cat) => {
+      if (cancelled) return;
+      setCategoryId(cat?.id || null);
+      setCategoryResolved(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [categorySlug]);
+
+  useEffect(() => {
+    if (!categoryResolved) return;
+
     setLoading(true);
     const query = {};
     if (filters.size) query.container_size = filters.size;
@@ -59,6 +84,7 @@ export default function Containers() {
     if (filters.condition) query.condition = filters.condition;
     if (filters.color) query.color = filters.color;
     if (filters.availability) query.availability = filters.availability;
+    if (categoryId) query.category_id = categoryId;
 
     const sortMap = { newest: "-created_date", price_asc: "price", price_desc: "-price" };
     const sortValue = sortMap[filters.sort] || "-created_date";
@@ -68,12 +94,14 @@ export default function Containers() {
       : listProducts(sortValue, 100);
 
     fetcher.then(setProducts).catch(() => {}).finally(() => setLoading(false));
-  }, [filters.size, filters.type, filters.condition, filters.color, filters.availability, filters.sort]);
+  }, [filters.size, filters.type, filters.condition, filters.color, filters.availability, filters.sort, categoryId, categoryResolved]);
+
+  const localizedProducts = useLocalizedList("product", products, language, ["name", "short_description", "description"]);
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return products;
+    if (!search.trim()) return localizedProducts;
     const q = search.toLowerCase();
-    return products.filter((p) => {
+    return localizedProducts.filter((p) => {
       const displayProduct = localizeDefaultProduct(p, language);
       const values = [
         displayProduct.name,
@@ -89,7 +117,7 @@ export default function Containers() {
 
       return values.some((value) => value?.toLowerCase().includes(q));
     });
-  }, [products, search, language]);
+  }, [localizedProducts, search, language]);
 
   return (
     <div className="pt-20 lg:pt-24 min-h-screen bg-gray-50">

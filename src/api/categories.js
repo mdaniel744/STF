@@ -17,3 +17,21 @@ export async function listFeaturedCategories() {
     return [];
   }
 }
+
+export async function findCategoryBySlug(slug) {
+  if (!hasSupabaseConfig || !slug) return null;
+
+  try {
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id, name, slug, description, image_url")
+      .eq("store_id", STORE_ID)
+      .eq("slug", slug)
+      .limit(1);
+
+    if (error) throw error;
+    return data?.[0] || null;
+  } catch {
+    return null;
+  }
+}

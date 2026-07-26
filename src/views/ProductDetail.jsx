@@ -18,6 +18,7 @@ import AddToCartButton from "@/components/cart/AddToCartButton";
 import ProductCard from "@/components/containers/ProductCard";
 import DimensionDiagram from "@/components/containers/DimensionDiagram";
 import TrustBar from "@/components/shared/TrustBar";
+import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 import {
   ChevronRight, Loader2, Truck, Shield, MapPin,
   Minus, Plus, Info, Calculator, ChevronLeft, ChevronRight as ChevronRightIcon,
@@ -203,7 +204,14 @@ export default function ProductDetail() {
   const [shippingResult, setShippingResult] = useState(null);
 
   const { t, language } = useLanguage();
-  const localizedProduct = useMemo(() => localizeDefaultProduct(product, language), [product, language]);
+  const fallbackLocalized = useMemo(() => localizeDefaultProduct(product, language), [product, language]);
+  const overlaidList = useLocalizedList(
+    "product",
+    fallbackLocalized ? [fallbackLocalized] : [],
+    language,
+    ["name", "short_description", "description"]
+  );
+  const localizedProduct = overlaidList[0] || null;
 
   const textMap = {};
   if (localizedProduct) {

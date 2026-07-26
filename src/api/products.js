@@ -65,6 +65,7 @@ function applyFilters(query, filters) {
   });
   if (Object.keys(attributeMatch).length > 0) q = q.contains("attributes", attributeMatch);
 
+  if (filters.category_id) q = q.eq("category_id", filters.category_id);
   if (filters.availability === "In Stock") q = q.gt("stock_quantity", 0);
   if (filters.availability === "Out of Stock") q = q.eq("stock_quantity", 0);
   return q;

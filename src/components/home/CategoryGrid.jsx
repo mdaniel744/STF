@@ -6,14 +6,17 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { listFeaturedCategories } from "@/api/categories";
 import { getCategoryIcon } from "@/lib/categoryIcons";
+import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 
 export default function CategoryGrid() {
-  const { t } = useLanguage();
-  const [categories, setCategories] = useState([]);
+  const { t, language } = useLanguage();
+  const [rawCategories, setRawCategories] = useState([]);
 
   useEffect(() => {
-    listFeaturedCategories().then(setCategories);
+    listFeaturedCategories().then(setRawCategories);
   }, []);
+
+  const categories = useLocalizedList("category", rawCategories, language, ["name", "description"]);
 
   if (categories.length === 0) return null;
 
@@ -33,7 +36,7 @@ export default function CategoryGrid() {
             return (
               <Link
                 key={cat.id}
-                to={`/containers?type=${encodeURIComponent(cat.name)}`}
+                to={`/containers?category=${encodeURIComponent(cat.slug)}`}
                 className="group relative overflow-hidden rounded-lg aspect-[4/3]"
               >
                 <img

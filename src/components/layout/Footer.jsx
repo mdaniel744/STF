@@ -5,16 +5,18 @@ import Link from "@/components/LocalizedLink";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { listFeaturedCategories } from "@/api/categories";
+import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 
 export default function Footer() {
-  const { t } = useLanguage();
-  const [categories, setCategories] = useState([]);
+  const { t, language } = useLanguage();
+  const [rawCategories, setRawCategories] = useState([]);
 
   useEffect(() => {
-    listFeaturedCategories().then(setCategories);
+    listFeaturedCategories().then(setRawCategories);
   }, []);
 
-  const containerLinks = categories.map((cat) => ({ label: cat.name, type: cat.name, id: cat.id }));
+  const categories = useLocalizedList("category", rawCategories, language, ["name"]);
+  const containerLinks = categories.map((cat) => ({ label: cat.name, slug: cat.slug, id: cat.id }));
 
   const companyLinks = [
     { label: t("footer.aboutUs"), path: "/about" },
@@ -58,7 +60,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {containerLinks.map((item) => (
                 <li key={item.id}>
-                  <Link to={`/containers?type=${encodeURIComponent(item.type)}`} className="text-sm text-white/60 hover:text-orange-400 transition-colors">
+                  <Link to={`/containers?category=${encodeURIComponent(item.slug)}`} className="text-sm text-white/60 hover:text-orange-400 transition-colors">
                     {item.label}
                   </Link>
                 </li>
