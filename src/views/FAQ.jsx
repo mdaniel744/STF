@@ -6,6 +6,17 @@ import { ChevronRight, Loader2, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useTranslations } from "@/hooks/useTranslations";
 
+const categoryLabels = {
+  "Container Sizes": { nl: "Containermaten", en: "Container Sizes", de: "Containergrößen", fr: "Dimensions des conteneurs", es: "Tamaños de contenedor" },
+  Delivery: { nl: "Levering", en: "Delivery", de: "Lieferung", fr: "Livraison", es: "Entrega" },
+  Payment: { nl: "Betaling", en: "Payment", de: "Zahlung", fr: "Paiement", es: "Pago" },
+  Warranty: { nl: "Garantie", en: "Warranty", de: "Garantie", fr: "Garantie", es: "Garantía" },
+  "New vs Used": { nl: "Nieuw versus gebruikt", en: "New vs Used", de: "Neu oder gebraucht", fr: "Neuf ou d'occasion", es: "Nuevo o usado" },
+  "High Cube": { nl: "High Cube", en: "High Cube", de: "High Cube", fr: "High Cube", es: "High Cube" },
+  "Open Side": { nl: "Open Side", en: "Open Side", de: "Open Side", fr: "Open Side", es: "Open Side" },
+  Refrigerated: { nl: "Gekoeld", en: "Refrigerated", de: "Kühlcontainer", fr: "Réfrigérés", es: "Refrigerados" },
+};
+
 export default function FAQPage() {
   const { t, language } = useLanguage();
   const [faqs, setFaqs] = useState([]);
@@ -26,6 +37,7 @@ export default function FAQPage() {
     textMap['a_' + faq.id] = faq.answer;
   });
   const { translated } = useTranslations(textMap, language);
+  const getCategoryLabel = (category) => categoryLabels[category]?.[language] || category;
 
   return (
     <div className="pt-20 lg:pt-24">
@@ -63,7 +75,9 @@ export default function FAQPage() {
             <div className="space-y-10">
               {categories.map((category) => (
                 <div key={category}>
-                  <h2 className="text-xl font-bold text-navy-800 mb-4 pb-2 border-b border-gray-200">{category}</h2>
+                  <h2 className="text-xl font-bold text-navy-800 mb-4 pb-2 border-b border-gray-200">
+                    {getCategoryLabel(category)}
+                  </h2>
                   <Accordion type="single" collapsible className="space-y-3">
                     {faqs.filter((f) => f.category === category).map((faq) => (
                       <AccordionItem key={faq.id} value={faq.id} className="bg-white border border-gray-200 rounded-lg px-4">

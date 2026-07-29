@@ -21,7 +21,7 @@ export default function About() {
     <div className="pt-20 lg:pt-24">
       <section className="relative py-20 lg:py-32 bg-navy-800 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src={ABOUT_IMAGE} alt="Container storage yard" className="w-full h-full object-cover" />
+          <img src={ABOUT_IMAGE} alt={t("about.imageAlt")} className="w-full h-full object-cover" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
@@ -63,7 +63,7 @@ export default function About() {
               </Link>
             </div>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-              <img src={ABOUT_IMAGE} alt="STF Container storage yard" className="w-full h-full object-cover" />
+              <img src={ABOUT_IMAGE} alt={t("about.imageAlt")} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
