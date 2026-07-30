@@ -51,6 +51,8 @@ export default function HeroSection() {
       </div>
 
       <button
+        type="button"
+        aria-label={t("hero.scrollToContent")}
         onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: "smooth" })}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors animate-bounce"
       >

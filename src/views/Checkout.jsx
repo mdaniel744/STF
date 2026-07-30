@@ -6,7 +6,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizeCartItem } from "@/lib/i18n/cartDisplay";
 import { Loader2, CheckCircle2, ArrowRight, Copy, Landmark } from "lucide-react";
-import SEOHead from "@/components/SEOHead";
 
 const BANK_DETAILS = {
   iban: "NL24 INGB 0001 2345 67",
@@ -117,7 +116,6 @@ export default function Checkout() {
   if (completedOrder) {
     return (
       <div className="pt-20 lg:pt-24 min-h-screen bg-gray-50">
-        <SEOHead title={`${t("checkout.orderConfirmed")} — STF Container B.V.`} description={t("checkout.orderConfirmed")} />
         <section className="py-16 lg:py-24">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-lg border border-gray-200 p-8 text-center mb-6">
@@ -224,7 +222,6 @@ export default function Checkout() {
 
   return (
     <div className="pt-20 lg:pt-24 min-h-screen bg-gray-50">
-      <SEOHead title={`${t("checkout.title")} — STF Container B.V.`} description={t("checkout.title")} />
       <section className="py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-navy-800 mb-8">{t("checkout.title")}</h1>

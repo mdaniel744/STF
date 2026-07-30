@@ -189,8 +189,9 @@ function displayLabel(language, group, value) {
   return localizedLabels[language]?.[group]?.[value] || value;
 }
 
-export default function ProductDetail() {
-  const { slug } = useParams();
+export default function ProductDetail({ slug: slugOverride = null }) {
+  const params = useParams();
+  const slug = slugOverride || params.slug;
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
   const [faqs, setFaqs] = useState([]);
@@ -359,12 +360,16 @@ export default function ProductDetail() {
               {galleryCount > 1 && (
                 <>
                   <button
+                    type="button"
+                    aria-label={t("productDetail.previousImage")}
                     onClick={() => navImage(-1)}
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5 text-navy-800" />
                   </button>
                   <button
+                    type="button"
+                    aria-label={t("productDetail.nextImage")}
                     onClick={() => navImage(1)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm transition-colors"
                   >
@@ -379,6 +384,9 @@ export default function ProductDetail() {
                 {photoImages.map((img, i) => (
                   <button
                     key={i}
+                    type="button"
+                    aria-label={t("productDetail.selectImage", { number: i + 1 })}
+                    aria-pressed={i === selectedImage}
                     onClick={() => setSelectedImage(i)}
                     className={`flex-shrink-0 w-20 h-20 rounded overflow-hidden border-2 transition-colors ${
                       i === selectedImage ? "border-navy-800" : "border-transparent"
@@ -389,6 +397,9 @@ export default function ProductDetail() {
                 ))}
                 {hasDiagram && (
                   <button
+                    type="button"
+                    aria-label={t("productDetail.dimensionDiagram")}
+                    aria-pressed={isDiagramSlide}
                     onClick={() => setSelectedImage(photoImages.length)}
                     className={`flex-shrink-0 w-20 h-20 rounded overflow-hidden border-2 flex items-center justify-center bg-gray-50 transition-colors ${
                       isDiagramSlide ? "border-navy-800" : "border-transparent"
@@ -433,6 +444,8 @@ export default function ProductDetail() {
                 </div>
                 <div className="flex items-center gap-1 mb-2">
                   <button
+                    type="button"
+                    aria-pressed={vatMode === "excl"}
                     onClick={() => setVatMode("excl")}
                     className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                       vatMode === "excl" ? "bg-orange-500 text-navy-950" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -441,6 +454,8 @@ export default function ProductDetail() {
                     {t("productDetail.exclVat")}
                   </button>
                   <button
+                    type="button"
+                    aria-pressed={vatMode === "incl"}
                     onClick={() => setVatMode("incl")}
                     className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
                       vatMode === "incl" ? "bg-orange-500 text-navy-950" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -470,6 +485,11 @@ export default function ProductDetail() {
                     {colors.map((c) => (
                       <button
                         key={c}
+                        type="button"
+                        aria-label={t("productDetail.selectColor", {
+                          color: displayLabel(language, "color", c),
+                        })}
+                        aria-pressed={selectedColor === c}
                         onClick={() => setSelectedColor(c)}
                         title={displayLabel(language, "color", c)}
                         className={`w-8 h-8 rounded-full border-2 transition-all ${
@@ -488,6 +508,8 @@ export default function ProductDetail() {
                 <div className="flex items-center gap-3">
                   <div className="flex items-center border border-gray-200 rounded-lg">
                     <button
+                      type="button"
+                      aria-label={t("productDetail.decreaseQuantity")}
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                       className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-navy-800 transition-colors"
                     >
@@ -495,6 +517,8 @@ export default function ProductDetail() {
                     </button>
                     <span className="w-12 text-center font-semibold text-navy-800">{quantity}</span>
                     <button
+                      type="button"
+                      aria-label={t("productDetail.increaseQuantity")}
                       onClick={() => setQuantity((q) => Math.min(MAX_ONLINE, q + 1))}
                       className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-navy-800 transition-colors"
                     >
@@ -525,6 +549,7 @@ export default function ProductDetail() {
                     className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-navy-400 focus:ring-1 focus:ring-navy-400"
                   />
                   <button
+                    type="button"
                     onClick={handleShippingCalc}
                     className="px-4 py-2 bg-navy-800 text-white text-sm font-medium rounded-lg hover:bg-navy-700 transition-colors"
                   >
@@ -556,6 +581,8 @@ export default function ProductDetail() {
 
               {/* CTA */}
               <button
+                type="button"
+                aria-expanded={showQuote}
                 onClick={() => setShowQuote(!showQuote)}
                 className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-orange-500 text-navy-950 font-semibold rounded-lg hover:bg-orange-400 transition-colors text-lg mb-4 mt-4"
               >

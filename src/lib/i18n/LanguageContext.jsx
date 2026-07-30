@@ -3,15 +3,11 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DEFAULT_LANGUAGE, FALLBACK_LANGUAGE, SUPPORTED_LANGUAGES } from "./config";
+import { hasLocalePrefix, localizePublicPath } from "./permalinks";
 import { translations } from "./translations";
 
 const LanguageContext = createContext();
 const LANGUAGE_KEY = "stf_language";
-const UNLOCALIZED_PATHS = ["/admin", "/login", "/register", "/forgot-password", "/reset-password"];
-
-function isUnlocalizedPath(path) {
-  return UNLOCALIZED_PATHS.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
-}
 
 export function LanguageProvider({ children }) {
   const pathname = usePathname() || "/";
@@ -33,24 +29,14 @@ export function LanguageProvider({ children }) {
       document.documentElement.lang = lang;
     }
 
-    const segments = pathname.split("/").filter(Boolean);
-    if (SUPPORTED_LANGUAGES.includes(segments[0])) {
-      segments[0] = lang;
-    } else if (isUnlocalizedPath(pathname)) {
-      segments.length = 0;
-      segments.push(lang);
-    } else {
-      segments.unshift(lang);
-    }
-
-    router.push(`/${segments.join("/")}${searchString ? `?${searchString}` : ""}`);
+    const currentPath = `${pathname}${searchString ? `?${searchString}` : ""}`;
+    router.push(localizePublicPath(currentPath, lang));
   }, [pathname, router, searchString]);
 
   const localePath = useCallback((path) => {
     if (!path || typeof path !== "string" || !path.startsWith("/")) return path;
-    if (isUnlocalizedPath(path)) return path;
-    if (SUPPORTED_LANGUAGES.some((l) => path.startsWith(`/${l}/`) || path === `/${l}`)) return path;
-    return `/${language}${path}`;
+    if (hasLocalePrefix(path)) return path;
+    return localizePublicPath(path, language);
   }, [language]);
 
   const localeNavigate = useCallback((path, options) => {

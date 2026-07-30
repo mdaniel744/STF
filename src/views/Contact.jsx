@@ -74,7 +74,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-navy-800 mb-1">{t("contact.telephone")}</h3>
-                    <a href="tel:+31301234567" className="text-sm text-gray-500 hover:text-orange-500">+31 30 123 4567</a>
+                    <a href="tel:+3154546565" className="text-sm text-gray-500 hover:text-orange-500">+31 545465 65</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -83,7 +83,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-navy-800 mb-1">{t("contact.email")}</h3>
-                    <a href="mailto:info@stfcontainer.nl" className="text-sm text-gray-500 hover:text-orange-500">info@stfcontainer.nl</a>
+                    <a href="mailto:contact@stfcontainer.com" className="text-sm text-gray-500 hover:text-orange-500">contact@stfcontainer.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -110,7 +110,7 @@ export default function Contact() {
               </div>
 
               <a
-                href="https://wa.me/31301234567"
+                href="https://wa.me/3154546565"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors"

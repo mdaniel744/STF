@@ -33,7 +33,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Heeft u vragen over ons cookiebeleid? Neem contact op via info@stfcontainer.nl."],
+          content: ["Heeft u vragen over ons cookiebeleid? Neem contact op via contact@stfcontainer.com."],
         },
       ],
     },
@@ -78,7 +78,7 @@ const policyContent = {
           heading: "Uw rechten",
           content: [
             "U heeft recht op inzage, correctie, verwijdering, beperking van verwerking, overdraagbaarheid van gegevens, bezwaar tegen verwerking en intrekking van toestemming.",
-            "Neem voor het uitoefenen van deze rechten contact met ons op via info@stfcontainer.nl.",
+            "Neem voor het uitoefenen van deze rechten contact met ons op via contact@stfcontainer.com.",
           ],
         },
         {
@@ -90,7 +90,7 @@ const policyContent = {
         {
           heading: "Contact",
           content: [
-            "Heeft u vragen over deze privacyverklaring of over uw persoonsgegevens? Neem contact op via info@stfcontainer.nl of +31 30 123 4567.",
+            "Heeft u vragen over deze privacyverklaring of over uw persoonsgegevens? Neem contact op via contact@stfcontainer.com of +31 545465 65.",
           ],
         },
       ],
@@ -209,7 +209,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Heeft u vragen over levering? Neem contact op via info@stfcontainer.nl of +31 30 123 4567."],
+          content: ["Heeft u vragen over levering? Neem contact op via contact@stfcontainer.com of +31 545465 65."],
         },
       ],
     },
@@ -250,7 +250,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Heeft u vragen over deze disclaimer? Neem contact op via info@stfcontainer.nl."],
+          content: ["Heeft u vragen over deze disclaimer? Neem contact op via contact@stfcontainer.com."],
         },
       ],
     },
@@ -289,7 +289,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Questions about our cookie policy? Contact us at info@stfcontainer.nl."],
+          content: ["Questions about our cookie policy? Contact us at contact@stfcontainer.com."],
         },
       ],
     },
@@ -334,7 +334,7 @@ const policyContent = {
           heading: "Your rights",
           content: [
             "You have the right to access, correct or delete your data, restrict processing, request data portability, object to processing and withdraw consent.",
-            "To exercise these rights, contact us at info@stfcontainer.nl.",
+            "To exercise these rights, contact us at contact@stfcontainer.com.",
           ],
         },
         {
@@ -346,7 +346,7 @@ const policyContent = {
         {
           heading: "Contact",
           content: [
-            "Questions about this privacy policy or your personal data? Contact us at info@stfcontainer.nl or +31 30 123 4567.",
+            "Questions about this privacy policy or your personal data? Contact us at contact@stfcontainer.com or +31 545465 65.",
           ],
         },
       ],
@@ -465,7 +465,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Questions about delivery? Contact us at info@stfcontainer.nl or +31 30 123 4567."],
+          content: ["Questions about delivery? Contact us at contact@stfcontainer.com or +31 545465 65."],
         },
       ],
     },
@@ -506,7 +506,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Questions about this disclaimer? Contact us at info@stfcontainer.nl."],
+          content: ["Questions about this disclaimer? Contact us at contact@stfcontainer.com."],
         },
       ],
     },
@@ -545,7 +545,7 @@ const policyContent = {
         },
         {
           heading: "Kontakt",
-          content: ["Haben Sie Fragen zu unserer Cookie-Richtlinie? Kontaktieren Sie uns unter info@stfcontainer.nl."],
+          content: ["Haben Sie Fragen zu unserer Cookie-Richtlinie? Kontaktieren Sie uns unter contact@stfcontainer.com."],
         },
       ],
     },
@@ -590,7 +590,7 @@ const policyContent = {
           heading: "Ihre Rechte",
           content: [
             "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruch gegen die Verarbeitung und Widerruf Ihrer Einwilligung.",
-            "Zur Ausübung dieser Rechte kontaktieren Sie uns unter info@stfcontainer.nl.",
+            "Zur Ausübung dieser Rechte kontaktieren Sie uns unter contact@stfcontainer.com.",
           ],
         },
         {
@@ -602,7 +602,7 @@ const policyContent = {
         {
           heading: "Kontakt",
           content: [
-            "Haben Sie Fragen zu dieser Datenschutzerklärung oder Ihren personenbezogenen Daten? Kontaktieren Sie uns unter info@stfcontainer.nl oder +31 30 123 4567.",
+            "Haben Sie Fragen zu dieser Datenschutzerklärung oder Ihren personenbezogenen Daten? Kontaktieren Sie uns unter contact@stfcontainer.com oder +31 545465 65.",
           ],
         },
       ],
@@ -721,7 +721,7 @@ const policyContent = {
         },
         {
           heading: "Kontakt",
-          content: ["Haben Sie Fragen zur Lieferung? Kontaktieren Sie uns unter info@stfcontainer.nl oder +31 30 123 4567."],
+          content: ["Haben Sie Fragen zur Lieferung? Kontaktieren Sie uns unter contact@stfcontainer.com oder +31 545465 65."],
         },
       ],
     },
@@ -762,7 +762,7 @@ const policyContent = {
         },
         {
           heading: "Kontakt",
-          content: ["Haben Sie Fragen zu diesem Haftungsausschluss? Kontaktieren Sie uns unter info@stfcontainer.nl."],
+          content: ["Haben Sie Fragen zu diesem Haftungsausschluss? Kontaktieren Sie uns unter contact@stfcontainer.com."],
         },
       ],
     },
@@ -801,7 +801,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Vous avez des questions sur notre politique relative aux cookies ? Contactez-nous à info@stfcontainer.nl."],
+          content: ["Vous avez des questions sur notre politique relative aux cookies ? Contactez-nous à contact@stfcontainer.com."],
         },
       ],
     },
@@ -846,7 +846,7 @@ const policyContent = {
           heading: "Vos droits",
           content: [
             "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du traitement, de portabilité, d'opposition au traitement et de retrait du consentement.",
-            "Pour exercer ces droits, contactez-nous à info@stfcontainer.nl.",
+            "Pour exercer ces droits, contactez-nous à contact@stfcontainer.com.",
           ],
         },
         {
@@ -858,7 +858,7 @@ const policyContent = {
         {
           heading: "Contact",
           content: [
-            "Vous avez des questions sur cette politique de confidentialité ou sur vos données personnelles ? Contactez-nous à info@stfcontainer.nl ou au +31 30 123 4567.",
+            "Vous avez des questions sur cette politique de confidentialité ou sur vos données personnelles ? Contactez-nous à contact@stfcontainer.com ou au +31 545465 65.",
           ],
         },
       ],
@@ -977,7 +977,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Vous avez des questions sur la livraison ? Contactez-nous à info@stfcontainer.nl ou au +31 30 123 4567."],
+          content: ["Vous avez des questions sur la livraison ? Contactez-nous à contact@stfcontainer.com ou au +31 545465 65."],
         },
       ],
     },
@@ -1018,7 +1018,7 @@ const policyContent = {
         },
         {
           heading: "Contact",
-          content: ["Vous avez des questions sur ces mentions légales ? Contactez-nous à info@stfcontainer.nl."],
+          content: ["Vous avez des questions sur ces mentions légales ? Contactez-nous à contact@stfcontainer.com."],
         },
       ],
     },
@@ -1057,7 +1057,7 @@ const policyContent = {
         },
         {
           heading: "Contacto",
-          content: ["¿Tiene preguntas sobre nuestra política de cookies? Escríbanos a info@stfcontainer.nl."],
+          content: ["¿Tiene preguntas sobre nuestra política de cookies? Escríbanos a contact@stfcontainer.com."],
         },
       ],
     },
@@ -1102,7 +1102,7 @@ const policyContent = {
           heading: "Sus derechos",
           content: [
             "Tiene derecho a acceder, rectificar o eliminar sus datos, limitar el tratamiento, solicitar la portabilidad, oponerse al tratamiento y retirar su consentimiento.",
-            "Para ejercer estos derechos, escríbanos a info@stfcontainer.nl.",
+            "Para ejercer estos derechos, escríbanos a contact@stfcontainer.com.",
           ],
         },
         {
@@ -1114,7 +1114,7 @@ const policyContent = {
         {
           heading: "Contacto",
           content: [
-            "¿Tiene preguntas sobre esta política de privacidad o sus datos personales? Escríbanos a info@stfcontainer.nl o llame al +31 30 123 4567.",
+            "¿Tiene preguntas sobre esta política de privacidad o sus datos personales? Escríbanos a contact@stfcontainer.com o llame al +31 545465 65.",
           ],
         },
       ],
@@ -1233,7 +1233,7 @@ const policyContent = {
         },
         {
           heading: "Contacto",
-          content: ["¿Tiene preguntas sobre la entrega? Escríbanos a info@stfcontainer.nl o llame al +31 30 123 4567."],
+          content: ["¿Tiene preguntas sobre la entrega? Escríbanos a contact@stfcontainer.com o llame al +31 545465 65."],
         },
       ],
     },
@@ -1274,7 +1274,7 @@ const policyContent = {
         },
         {
           heading: "Contacto",
-          content: ["¿Tiene preguntas sobre este aviso legal? Escríbanos a info@stfcontainer.nl."],
+          content: ["¿Tiene preguntas sobre este aviso legal? Escríbanos a contact@stfcontainer.com."],
         },
       ],
     },

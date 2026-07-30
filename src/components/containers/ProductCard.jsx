@@ -151,8 +151,8 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg hover:border-navy-200 transition-all duration-300 flex flex-col">
-      <Link to={`/containers/${displayProduct.slug || displayProduct.id}`} className="block">
-        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+        <Link to={`/containers/${displayProduct.slug || displayProduct.id}`} className="block w-full h-full">
           {images.length > 0 ? (
             <img
               src={images[imgIndex]}
@@ -165,50 +165,54 @@ export default function ProductCard({ product }) {
               <span className="font-technical text-sm">{t("productCard.noImage")}</span>
             </div>
           )}
+        </Link>
 
-          {/* Carousel arrows */}
-          {images.length > 1 && (
-            <>
-              <button
-                onClick={prevImg}
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <ChevronLeft className="w-4 h-4 text-navy-800" />
-              </button>
-              <button
-                onClick={nextImg}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <ChevronRight className="w-4 h-4 text-navy-800" />
-              </button>
-              {/* Dots */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                {images.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`w-1.5 h-1.5 rounded-full transition-colors ${i === imgIndex ? "bg-orange-500" : "bg-white/60"}`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
+        {/* Carousel arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label={t("productCard.previousImage")}
+              onClick={prevImg}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+            >
+              <ChevronLeft className="w-4 h-4 text-navy-800" />
+            </button>
+            <button
+              type="button"
+              aria-label={t("productCard.nextImage")}
+              onClick={nextImg}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+            >
+              <ChevronRight className="w-4 h-4 text-navy-800" />
+            </button>
+            {/* Dots */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+              {images.map((_, i) => (
+                <span
+                  key={i}
+                  className={`w-1.5 h-1.5 rounded-full transition-colors ${i === imgIndex ? "bg-orange-500" : "bg-white/60"}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
-          {/* Badges */}
-          <div className="absolute top-3 left-3 flex gap-2">
-            <Badge className={`${conditionColors[displayProduct.condition] || "bg-gray-100 text-gray-700"} text-xs font-medium border-0`}>
-              {displayLabel(language, "condition", displayProduct.condition)}
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex gap-2 pointer-events-none">
+          <Badge className={`${conditionColors[displayProduct.condition] || "bg-gray-100 text-gray-700"} text-xs font-medium border-0`}>
+            {displayLabel(language, "condition", displayProduct.condition)}
+          </Badge>
+          {displayProduct.featured && (
+            <Badge className="bg-orange-500 text-navy-950 text-xs font-medium border-0">
+              {t("productCard.featured")}
             </Badge>
-            {displayProduct.featured && (
-              <Badge className="bg-orange-500 text-navy-950 text-xs font-medium border-0">
-                {t("productCard.featured")}
-              </Badge>
-            )}
-          </div>
-          <div className="absolute top-3 right-3">
-            <span className={`w-2.5 h-2.5 rounded-full inline-block ${availabilityColors[displayProduct.availability] || "bg-gray-400"}`} />
-          </div>
+          )}
         </div>
-      </Link>
+        <div className="absolute top-3 right-3 pointer-events-none">
+          <span className={`w-2.5 h-2.5 rounded-full inline-block ${availabilityColors[displayProduct.availability] || "bg-gray-400"}`} />
+        </div>
+      </div>
 
       <div className="p-5 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
@@ -233,6 +237,11 @@ export default function ProductCard({ product }) {
               {colors.map((c) => (
                 <button
                   key={c}
+                  type="button"
+                  aria-label={t("productCard.selectColor", {
+                    color: displayLabel(language, "color", c),
+                  })}
+                  aria-pressed={selectedColor === c}
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedColor(c);

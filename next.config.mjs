@@ -1,3 +1,7 @@
+import {
+  buildLegacyPermalinkRedirects,
+} from "./src/lib/i18n/permalinks.js";
+
 const appBaseUrl = process.env.NEXT_PUBLIC_BASE44_APP_BASE_URL;
 
 /** @type {import('next').NextConfig} */
@@ -16,6 +20,9 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  async redirects() {
+    return buildLegacyPermalinkRedirects();
   },
   async rewrites() {
     if (!appBaseUrl) return [];

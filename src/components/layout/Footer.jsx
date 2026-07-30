@@ -98,14 +98,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-orange-400 flex-shrink-0" />
-                <a href="tel:+31301234567" className="text-sm text-white/70 hover:text-orange-400 transition-colors">
-                  +31 30 123 4567
+                <a href="tel:+3154546565" className="text-sm text-white/70 hover:text-orange-400 transition-colors">
+                  +31 545465 65
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-orange-400 flex-shrink-0" />
-                <a href="mailto:info@stfcontainer.nl" className="text-sm text-white/70 hover:text-orange-400 transition-colors">
-                  info@stfcontainer.nl
+                <a href="mailto:contact@stfcontainer.com" className="text-sm text-white/70 hover:text-orange-400 transition-colors">
+                  contact@stfcontainer.com
                 </a>
               </li>
             </ul>

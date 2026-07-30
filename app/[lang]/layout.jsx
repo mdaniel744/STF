@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SEOHead from "@/components/SEOHead";
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/translations";
 
@@ -16,10 +17,6 @@ export async function generateMetadata({ params }) {
   return {
     title: "STF Container B.V.",
     description: t.hero.description,
-    alternates: {
-      canonical: `/${activeLang}`,
-      languages: Object.fromEntries(SUPPORTED_LANGUAGES.map((code) => [code, `/${code}`])),
-    },
   };
 }
 
@@ -31,6 +28,7 @@ export default async function LocaleLayout({ children, params }) {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead />
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />

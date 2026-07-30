@@ -18,7 +18,7 @@ import { getShippingPolicyContent } from "@/data/shipping-policy-content";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const EMAIL = "contact@stfcontainer.com";
-const PHONE_DISPLAY = "+31 30 123 4567";
+const PHONE_DISPLAY = "+31 545465 65";
 const summaryIcons = [Clock3, Truck, ClipboardCheck];
 
 function PolicySection({ number, id, title, children }) {
@@ -72,7 +72,7 @@ function ContactDetails({ copy, compact = false }) {
         <Mail className="h-5 w-5 shrink-0 text-orange-500" />
         <span className="min-w-0 break-all">{EMAIL}</span>
       </a>
-      <a href="tel:+31301234567" className="flex items-center gap-3 font-medium text-navy-800 hover:text-orange-600">
+      <a href="tel:+3154546565" className="flex items-center gap-3 font-medium text-navy-800 hover:text-orange-600">
         <Phone className="h-5 w-5 shrink-0 text-orange-500" />
         {PHONE_DISPLAY}
       </a>

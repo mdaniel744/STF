@@ -1,3 +1,8 @@
+import {
+  getCanonicalProductSlug,
+  getLocalizedProductSlug,
+} from "@/lib/i18n/permalinks";
+
 const images = {
   standard: "https://media.base44.com/images/public/6a5515cc1c02a52a32b121f4/cdb7cd47c_generated_21c9ca15.png",
   highCube: "https://media.base44.com/images/public/6a5515cc1c02a52a32b121f4/b65c35fc9_generated_015e1e31.png",
@@ -720,6 +725,7 @@ export function localizeDefaultProduct(product, language) {
   return {
     ...product,
     ...translated,
+    slug: getLocalizedProductSlug(product.slug, language),
     specs_weight: localizeSpecValue(product.specs_weight, language),
     specs_volume: localizeSpecValue(product.specs_volume, language),
     specs_payload: localizeSpecValue(product.specs_payload, language),
@@ -760,5 +766,8 @@ export function filterDefaultProducts(query = {}, sort = "-created_date", limit 
 }
 
 export function findDefaultProductBySlugOrId(slugOrId) {
-  return defaultProducts.find((product) => product.slug === slugOrId || product.id === slugOrId) || null;
+  const canonicalSlug = getCanonicalProductSlug(slugOrId);
+  return defaultProducts.find(
+    (product) => product.slug === canonicalSlug || product.id === slugOrId
+  ) || null;
 }

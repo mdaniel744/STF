@@ -4,7 +4,6 @@ import { Trash2, Minus, Plus, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizeCartItem } from "@/lib/i18n/cartDisplay";
-import SEOHead from "@/components/SEOHead";
 
 export default function Cart() {
   const { items, updateQuantity, removeItem, subtotal, taxAmount, taxRate, total, itemCount } = useCart();
@@ -21,8 +20,6 @@ export default function Cart() {
 
   return (
     <div className="pt-20 lg:pt-24 min-h-screen bg-gray-50">
-      <SEOHead title={`${t("cart.title")} — STF Container B.V.`} description={t("cart.title")} />
-
       <section className="py-12 lg:py-16 bg-navy-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-white">
@@ -109,6 +106,8 @@ export default function Cart() {
                           </div>
                         </div>
                         <button
+                          type="button"
+                          aria-label={t("cart.removeItem", { name: displayItem.displayName })}
                           onClick={() => removeItem(item.cartKey)}
                           className="text-gray-400 hover:text-red-500 transition-colors p-1"
                         >
@@ -120,6 +119,8 @@ export default function Cart() {
                         {/* Quantity stepper */}
                         <div className="flex items-center border border-gray-200 rounded-lg">
                           <button
+                            type="button"
+                            aria-label={t("cart.decreaseQuantity")}
                             onClick={() => updateQuantity(item.cartKey, item.quantity - 1)}
                             className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-navy-800 transition-colors"
                           >
@@ -129,6 +130,8 @@ export default function Cart() {
                             {item.quantity}
                           </span>
                           <button
+                            type="button"
+                            aria-label={t("cart.increaseQuantity")}
                             onClick={() => updateQuantity(item.cartKey, item.quantity + 1)}
                             className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-navy-800 transition-colors"
                           >
