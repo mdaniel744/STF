@@ -10,10 +10,12 @@ export function useLocalizedList(entityType, items, language, fields) {
   const idsKey = ids.join(",");
 
   useEffect(() => {
-    if (language === DEFAULT_LANGUAGE || ids.length === 0) {
-      setTranslationsMap({});
-      return;
-    }
+    // Clear immediately on every language change so a stale map from the
+    // previous language can never render under the new language's label
+    // while the new fetch is in flight.
+    setTranslationsMap({});
+
+    if (language === DEFAULT_LANGUAGE || ids.length === 0) return;
 
     let cancelled = false;
     fetchTranslations(entityType, ids, language).then((map) => {
