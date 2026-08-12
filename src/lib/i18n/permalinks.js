@@ -1,4 +1,5 @@
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from "./config.js";
+import { PRODUCT_PERMALINKS as GENERATED_PRODUCT_PERMALINKS } from "./product-permalinks.generated.js";
 
 const UNLOCALIZED_PATHS = ["/admin", "/login", "/register", "/forgot-password", "/reset-password"];
 
@@ -89,88 +90,11 @@ export const LOCALIZED_ROUTE_SEGMENTS = {
   },
 };
 
-export const PRODUCT_PERMALINKS = [
-  {
-    id: "default-20ft-standard-new",
-    slugs: {
-      nl: "20ft-standaard-zeecontainer-nieuw",
-      en: "20ft-standard-shipping-container-new",
-      de: "20ft-standard-seecontainer-neu",
-      fr: "conteneur-maritime-standard-20ft-neuf",
-      es: "contenedor-maritimo-estandar-20ft-nuevo",
-    },
-  },
-  {
-    id: "default-40ft-standard-used",
-    slugs: {
-      nl: "40ft-standaard-container-gebruikt",
-      en: "40ft-standard-container-used",
-      de: "40ft-standard-container-gebraucht",
-      fr: "conteneur-standard-40ft-occasion",
-      es: "contenedor-estandar-40ft-usado",
-    },
-  },
-  {
-    id: "default-40ft-high-cube-one-trip",
-    slugs: {
-      nl: "40ft-high-cube-one-trip-container",
-      en: "40ft-high-cube-one-trip-container",
-      de: "40ft-high-cube-one-trip-container",
-      fr: "conteneur-high-cube-40ft-one-trip",
-      es: "contenedor-high-cube-40ft-one-trip",
-    },
-  },
-  {
-    id: "default-20ft-open-side-one-trip",
-    slugs: {
-      nl: "20ft-open-side-container-one-trip",
-      en: "20ft-open-side-container-one-trip",
-      de: "20ft-open-side-container-one-trip",
-      fr: "conteneur-open-side-20ft-one-trip",
-      es: "contenedor-open-side-20ft-one-trip",
-    },
-  },
-  {
-    id: "default-20ft-office-container",
-    slugs: {
-      nl: "20ft-kantoorcontainer-instapklaar",
-      en: "20ft-office-container-ready-to-use",
-      de: "20ft-buerocontainer-einsatzbereit",
-      fr: "conteneur-bureau-20ft-pret-a-emploi",
-      es: "contenedor-oficina-20ft-listo-para-usar",
-    },
-  },
-  {
-    id: "default-10ft-storage-container",
-    slugs: {
-      nl: "10ft-opslagcontainer-compact",
-      en: "10ft-compact-storage-container",
-      de: "10ft-kompakter-lagercontainer",
-      fr: "conteneur-de-stockage-compact-10ft",
-      es: "contenedor-de-almacenamiento-compacto-10ft",
-    },
-  },
-  {
-    id: "default-20ft-refrigerated-container",
-    slugs: {
-      nl: "20ft-koelcontainer-gebruikt",
-      en: "20ft-used-refrigerated-container",
-      de: "20ft-gebrauchter-kuehlcontainer",
-      fr: "conteneur-frigorifique-20ft-occasion",
-      es: "contenedor-refrigerado-20ft-usado",
-    },
-  },
-  {
-    id: "default-40ft-storage-wwt",
-    slugs: {
-      nl: "40ft-opslagcontainer-wwt",
-      en: "40ft-wwt-storage-container",
-      de: "40ft-wwt-lagercontainer",
-      fr: "conteneur-de-stockage-wwt-40ft",
-      es: "contenedor-de-almacenamiento-wwt-40ft",
-    },
-  },
-];
+// Generated at build time from live product/translation data - see
+// scripts/generate-product-permalinks.mjs. Falls back to an empty array
+// (handled gracefully by findProductPermalink below) if Supabase wasn't
+// configured when the generator last ran.
+export const PRODUCT_PERMALINKS = GENERATED_PRODUCT_PERMALINKS;
 
 function splitPathSuffix(path) {
   const match = path.match(/^([^?#]*)(.*)$/);

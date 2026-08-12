@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-product-permalinks.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/generate-product-permalinks.mjs",
     "build": "next build",
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
