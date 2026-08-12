@@ -7,6 +7,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { listFeaturedCategories } from "@/api/categories";
 import { getCategoryIcon } from "@/lib/categoryIcons";
 import { useLocalizedList } from "@/hooks/useLocalizedEntities";
+import { stripHtmlToText } from "@/lib/richText";
 
 export default function CategoryGrid() {
   const { t, language } = useLanguage();
@@ -49,7 +50,7 @@ export default function CategoryGrid() {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <Icon className="w-6 h-6 text-orange-400 mb-2" />
                   <h3 className="text-xl font-bold text-white mb-1">{cat.name}</h3>
-                  {cat.description && <p className="text-sm text-white/60 mb-3">{cat.description}</p>}
+                  {cat.description && <p className="text-sm text-white/60 mb-3">{stripHtmlToText(cat.description)}</p>}
                   <span className="flex items-center gap-1 text-sm font-medium text-orange-400 group-hover:gap-2 transition-all">
                     {t("categoryGrid.viewContainers")} <ArrowRight className="w-4 h-4" />
                   </span>

@@ -18,6 +18,8 @@ import AddToCartButton from "@/components/cart/AddToCartButton";
 import ProductCard from "@/components/containers/ProductCard";
 import DimensionDiagram from "@/components/containers/DimensionDiagram";
 import TrustBar from "@/components/shared/TrustBar";
+import RichText from "@/components/shared/RichText";
+import { stripHtmlToText } from "@/lib/richText";
 import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 import {
   ChevronRight, Loader2, Truck, Shield, MapPin,
@@ -479,7 +481,7 @@ export default function ProductDetail({ slug: slugOverride = null }) {
               </div>
 
               {translated.short_description && (
-                <p className="text-gray-600 mb-6 leading-relaxed">{translated.short_description}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed">{stripHtmlToText(translated.short_description)}</p>
               )}
 
               {/* Color selector */}
@@ -645,7 +647,7 @@ export default function ProductDetail({ slug: slugOverride = null }) {
             {translated.description && (
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-navy-800 mb-4">{t("productDetail.description")}</h2>
-                <div className="text-gray-600 leading-relaxed whitespace-pre-line">{translated.description}</div>
+                <RichText html={translated.description} />
               </div>
             )}
             {translated.features && (
