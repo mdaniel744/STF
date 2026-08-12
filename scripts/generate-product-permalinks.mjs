@@ -1,7 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { createClient } from "@supabase/supabase-js";
 
 const PROJECT_ROOT = process.cwd();
 const OUTPUT_PATH = path.join(PROJECT_ROOT, "src", "lib", "i18n", "product-permalinks.generated.js");
@@ -55,6 +54,25 @@ function dedupeSlugs(entries, language) {
   }
 }
 
+// Plain fetch() against PostgREST directly, deliberately not
+// @supabase/supabase-js - that client eagerly initializes a realtime/
+// WebSocket layer on construction even for simple one-off SELECTs, which
+// throws on Node <22 (this script runs under Node 20 on the deploy
+// server). Native fetch has been stable since Node 18, no dependency
+// needed for what this script actually does.
+async function supabaseSelect(baseUrl, anonKey, table, params) {
+  const url = new URL(`${baseUrl}/rest/v1/${table}`);
+  Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+
+  const res = await fetch(url, {
+    headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+  });
+  if (!res.ok) {
+    throw new Error(`Supabase query on "${table}" failed (${res.status}): ${await res.text()}`);
+  }
+  return res.json();
+}
+
 async function generate() {
   const env = { ...(await loadEnvLocal()), ...process.env };
   const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL;
@@ -66,27 +84,23 @@ async function generate() {
     return;
   }
 
-  const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-  const { data: products, error: productsError } = await supabase
-    .from("products")
-    .select("id, name, slug")
-    .eq("store_id", storeId)
-    .eq("status", "active");
-  if (productsError) throw productsError;
+  const products = await supabaseSelect(supabaseUrl, supabaseAnonKey, "products", {
+    select: "id,name,slug",
+    store_id: `eq.${storeId}`,
+    status: "eq.active",
+  });
 
   const ids = (products || []).map((p) => p.id);
-  const { data: translations, error: translationsError } = ids.length
-    ? await supabase
-        .from("translations")
-        .select("entity_id, locale, value")
-        .eq("store_id", storeId)
-        .eq("entity_type", "product")
-        .eq("field_name", "name")
-        .in("entity_id", ids)
-        .in("locale", TARGET_LANGUAGES)
-    : { data: [], error: null };
-  if (translationsError) throw translationsError;
+  const translations = ids.length
+    ? await supabaseSelect(supabaseUrl, supabaseAnonKey, "translations", {
+        select: "entity_id,locale,value",
+        store_id: `eq.${storeId}`,
+        entity_type: "eq.product",
+        field_name: "eq.name",
+        entity_id: `in.(${ids.join(",")})`,
+        locale: `in.(${TARGET_LANGUAGES.join(",")})`,
+      })
+    : [];
 
   const namesByProduct = {};
   (translations || []).forEach((row) => {
