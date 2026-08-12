@@ -6,6 +6,9 @@ import {
   findDefaultProductBySlugOrId,
   listDefaultProducts,
 } from "@/data/default-products";
+import { getCanonicalProductSlug } from "@/lib/i18n/permalinks";
+
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export const hasConfiguredBase44App = Boolean(
   appParams.appId && appParams.appId !== "null" && appParams.appId !== "undefined"
@@ -115,26 +118,40 @@ export async function filterProducts(query = {}, sort = "-created_date", limit =
 export async function findProductBySlugOrId(slugOrId) {
   if (!hasSupabaseConfig) return findDefaultProductBySlugOrId(slugOrId);
 
+  // The URL slug can be a language-specific translation (from permalinks.js)
+  // that only exists in routing, never in the database - Supabase only
+  // stores one canonical (Dutch) slug per product. Resolve back to that
+  // canonical slug before querying, and also try the raw value as-is for
+  // products that were never given localized slug translations.
+  const canonicalSlug = getCanonicalProductSlug(slugOrId);
+  const slugCandidates = [...new Set([canonicalSlug, slugOrId])];
+
   try {
     const { data: bySlug, error: slugError } = await supabase
       .from("products")
       .select("*")
       .eq("store_id", STORE_ID)
       .eq("status", "active")
-      .eq("slug", slugOrId)
+      .in("slug", slugCandidates)
       .limit(1);
     if (slugError) throw slugError;
     if (bySlug?.length) return mapProductRow(bySlug[0]);
 
-    const { data: byId, error: idError } = await supabase
-      .from("products")
-      .select("*")
-      .eq("store_id", STORE_ID)
-      .eq("status", "active")
-      .eq("id", slugOrId)
-      .limit(1);
-    if (idError) throw idError;
-    if (byId?.length) return mapProductRow(byId[0]);
+    // Only query by id if slugOrId is actually a UUID - passing a slug
+    // string here throws a Postgres type error, which previously got
+    // caught below and silently substituted stale demo data instead of
+    // correctly reporting "not found".
+    if (UUID_PATTERN.test(slugOrId)) {
+      const { data: byId, error: idError } = await supabase
+        .from("products")
+        .select("*")
+        .eq("store_id", STORE_ID)
+        .eq("status", "active")
+        .eq("id", slugOrId)
+        .limit(1);
+      if (idError) throw idError;
+      if (byId?.length) return mapProductRow(byId[0]);
+    }
 
     return null;
   } catch {
