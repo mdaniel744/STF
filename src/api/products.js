@@ -25,7 +25,7 @@ const SORT_COLUMNS = {
 
 function mapProductRow(row) {
   const attrs = row.attributes || {};
-  const images = Array.isArray(row.images) ? row.images : [];
+  const images = Array.isArray(row.images) ? [...new Set(row.images)] : [];
   const color = attrs["Color"] || null;
 
   return {
