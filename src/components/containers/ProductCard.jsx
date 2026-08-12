@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "@/components/LocalizedLink";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -137,6 +137,13 @@ export default function ProductCard({ product }) {
   const [imgIndex, setImgIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(displayProduct.color);
   const colors = displayProduct.available_colors?.length ? displayProduct.available_colors : (displayProduct.color ? [displayProduct.color] : []);
+
+  // Cards stay mounted across language switches (same key), so a
+  // previously-clicked-through gallery position would otherwise persist -
+  // always show the primary photo when the language changes.
+  useEffect(() => {
+    setImgIndex(0);
+  }, [language]);
 
   const nextImg = (e) => {
     e.preventDefault();

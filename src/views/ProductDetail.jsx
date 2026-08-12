@@ -272,6 +272,13 @@ export default function ProductDetail({ slug: slugOverride = null }) {
     };
   }, [slug]);
 
+  // Images don't change per language, but the gallery position (from
+  // clicking through photos) shouldn't carry over when switching language -
+  // always land back on the primary photo, not whatever angle was last viewed.
+  useEffect(() => {
+    setSelectedImage(0);
+  }, [language]);
+
   if (loading) {
     return (
       <div className="pt-32 flex justify-center min-h-screen">
