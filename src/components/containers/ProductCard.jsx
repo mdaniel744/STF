@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizeDefaultProduct } from "@/data/default-products";
-import { stripHtmlToText } from "@/lib/richText";
 
 const conditionColors = {
   "New": "bg-green-100 text-green-800",
@@ -229,14 +228,10 @@ export default function ProductCard({ product }) {
           <span className="font-technical text-xs text-gray-500">{displayLabel(language, "type", displayProduct.container_type)}</span>
         </div>
         <Link to={`/containers/${displayProduct.slug || displayProduct.id}`}>
-          <h3 className="font-semibold text-navy-800 mb-2 line-clamp-2 group-hover:text-navy-600 transition-colors">
+          <h3 className="font-semibold text-navy-800 mb-4 line-clamp-2 group-hover:text-navy-600 transition-colors">
             {displayProduct.name}
           </h3>
         </Link>
-        {displayProduct.short_description && (
-          <p className="text-sm text-gray-500 mb-3 line-clamp-2">{stripHtmlToText(displayProduct.short_description)}</p>
-        )}
-
         {/* Color swatches */}
         {colors.length > 0 && (
           <div className="flex items-center gap-2 mb-3">

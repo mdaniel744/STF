@@ -19,7 +19,6 @@ import ProductCard from "@/components/containers/ProductCard";
 import DimensionDiagram from "@/components/containers/DimensionDiagram";
 import TrustBar from "@/components/shared/TrustBar";
 import RichText from "@/components/shared/RichText";
-import { stripHtmlToText } from "@/lib/richText";
 import { useLocalizedList } from "@/hooks/useLocalizedEntities";
 import {
   ChevronRight, Loader2, Truck, Shield, MapPin,
@@ -212,14 +211,13 @@ export default function ProductDetail({ slug: slugOverride = null }) {
     "product",
     fallbackLocalized ? [fallbackLocalized] : [],
     language,
-    ["name", "short_description", "description"]
+    ["name", "description"]
   );
   const localizedProduct = overlaidList[0] || null;
 
   const textMap = {};
   if (localizedProduct) {
     textMap.name = localizedProduct.name;
-    textMap.short_description = localizedProduct.short_description;
     textMap.description = localizedProduct.description;
     textMap.features = localizedProduct.features;
     textMap.applications = localizedProduct.applications;
@@ -480,10 +478,6 @@ export default function ProductDetail({ slug: slugOverride = null }) {
                 )}
               </div>
 
-              {translated.short_description && (
-                <p className="text-gray-600 mb-6 leading-relaxed">{stripHtmlToText(translated.short_description)}</p>
-              )}
-
               {/* Color selector */}
               {colors.length > 0 && (
                 <div className="mb-6">
@@ -645,10 +639,16 @@ export default function ProductDetail({ slug: slugOverride = null }) {
 
           <div className={specs.length > 0 ? "lg:col-span-2" : "lg:col-span-3"}>
             {translated.description && (
-              <div className="mb-8">
-                <h2 className="text-xl font-bold text-navy-800 mb-4">{t("productDetail.description")}</h2>
-                <RichText html={translated.description} />
-              </div>
+              <Accordion type="single" collapsible className="mb-8">
+                <AccordionItem value="product-description" className="border-y border-gray-200">
+                  <AccordionTrigger className="py-5 text-left text-xl font-bold text-navy-800 hover:no-underline">
+                    {t("productDetail.description")}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6">
+                    <RichText html={translated.description} className="max-w-3xl" />
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             )}
             {translated.features && (
               <div className="mb-8">

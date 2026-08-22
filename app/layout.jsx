@@ -11,6 +11,9 @@ export const metadata = {
   },
   description:
     "STF Container B.V. levert nieuwe en gebruikte zeecontainers voor opslag, transport, bouw en industrie.",
+  verification: {
+    google: "8cD91-szblcNNLAMrnZvL0FX7g4Ye7fIOeqhlR-aZZ0",
+  },
 };
 
 export default function RootLayout({ children }) {

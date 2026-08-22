@@ -20,15 +20,15 @@ test("localizes public page routes and retains URL state", () => {
 
 test("localizes known product slugs in both directions", () => {
   const dutchSlug = "20ft-standaard-zeecontainer-nieuw";
-  const englishSlug = "20ft-standard-shipping-container-new";
-  const germanSlug = "20ft-standard-seecontainer-neu";
+  const englishSlug = "20ft-standard-shipping-container";
+  const germanSlug = "20-fu-standard-frachtcontainer";
 
   assert.equal(getLocalizedProductSlug(dutchSlug, "en"), englishSlug);
   assert.equal(getLocalizedProductSlug(englishSlug, "de"), germanSlug);
   assert.equal(getCanonicalProductSlug(germanSlug), dutchSlug);
   assert.equal(
     localizePublicPath(`/nl/containers/${dutchSlug}`, "fr"),
-    "/fr/conteneurs/conteneur-maritime-standard-20ft-neuf"
+    "/fr/conteneurs/conteneur-d-exp-dition-standard-de-20-pieds"
   );
 });
 
@@ -49,7 +49,7 @@ test("resolves localized route handlers and redirects legacy URLs", () => {
     redirects.some(
       ({ source, destination, permanent }) =>
         source === "/de/containers/20ft-standaard-zeecontainer-nieuw" &&
-        destination === "/de/container/20ft-standard-seecontainer-neu" &&
+        destination === "/de/container/20-fu-standard-frachtcontainer" &&
         permanent
     )
   );
